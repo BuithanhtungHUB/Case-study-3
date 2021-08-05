@@ -76,6 +76,8 @@
                                     <input class="form-control" value="{{$product->description}}"  name="description"  placeholder="Discription">
                                 </div>
                             </div>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                            <a href="{{route('product.list')}}" class="btn btn-success">Back</a>
                         </form>
                     </div>
                 </div>
