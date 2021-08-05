@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
@@ -16,32 +18,56 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.dashboard');
+//Route::get('/', function () {
+//    return view('admin.users.update');
+//});
+
+Route::prefix('admin')->group(function () {
+
+
+
+
 });
 Route::prefix('admin')->group(function (){
-    Route::prefix('product')->group(function (){
-        Route::get('/',[ProductController::class,'index'])->name('product.list');
-        Route::get('/create',[ProductController::class,'create'])->name('product.create');
-        Route::post('/create',[ProductController::class,'store'])->name('product.store');
-        Route::get('/update/{id}',[ProductController::class,'edit'])->name('product.edit');
-        Route::post('/update/{id}',[ProductController::class,'update'])->name('product.update');
-        Route::get('/delete/{id}',[ProductController::class,'destroy'])->name('product.delete');
+    Route::get('login', [LoginController::class, 'showFormLogin'])->name('admin.showFromlogin');
+    Route::post('login', [LoginController::class, 'login'])->name('admin.login');
+    Route::get('create', [UserController::class, 'create'])->name('users.create');
+    Route::post('create', [UserController::class, 'store'])->name('users.store');
+
+    Route::middleware(['auth'])->group(function () {
+        Route::prefix('users')->group(function () {
+            Route::get('/', [UserController::class, 'index'])->name('users.index');
+            Route::get('{id}/delete', [UserController::class, 'delete'])->name('users.delete');
+            Route::get('update/{id}',[UserController::class, 'edit'])->name('users.edit');
+            Route::post('update/{id}',[UserController::class, 'update'])->name('users.update');
+        });
+        Route::get('logout',[LoginController::class, 'logout'])->name('admin.logout');
+
+        Route::prefix('product')->group(function (){
+            Route::get('/',[ProductController::class,'index'])->name('product.list');
+            Route::get('/create',[ProductController::class,'create'])->name('product.create');
+            Route::post('/create',[ProductController::class,'store'])->name('product.store');
+            Route::get('/update/{id}',[ProductController::class,'edit'])->name('product.edit');
+            Route::post('/update/{id}',[ProductController::class,'update'])->name('product.update');
+            Route::get('/delete/{id}',[ProductController::class,'destroy'])->name('product.delete');
+        });
+        Route::prefix('brand')->group(function (){
+            Route::get('/',[BrandController::class,'index'])->name('brand.list');
+            Route::get('/create',[BrandController::class,'create'])->name('brand.create');
+            Route::post('/create',[BrandController::class,'store'])->name('brand.store');
+            Route::get('/update/{id}',[BrandController::class,'edit'])->name('brand.edit');
+            Route::post('/update/{id}',[BrandController::class,'update'])->name('brand.update');
+            Route::get('/delete/{id}',[BrandController::class,'destroy'])->name('brand.delete');
+        });
+        Route::prefix('category')->group(function (){
+            Route::get('/',[CategoryController::class,'index'])->name('category.list');
+            Route::get('/create',[CategoryController::class,'create'])->name('category.create');
+            Route::post('/create',[CategoryController::class,'store'])->name('category.store');
+            Route::get('/update/{id}',[CategoryController::class,'edit'])->name('category.edit');
+            Route::post('/update/{id}',[CategoryController::class,'update'])->name('category.update');
+            Route::get('/delete/{id}',[CategoryController::class,'destroy'])->name('category.delete');
+        });
     });
-    Route::prefix('brand')->group(function (){
-        Route::get('/',[BrandController::class,'index'])->name('brand.list');
-        Route::get('/create',[BrandController::class,'create'])->name('brand.create');
-        Route::post('/create',[BrandController::class,'store'])->name('brand.store');
-        Route::get('/update/{id}',[BrandController::class,'edit'])->name('brand.edit');
-        Route::post('/update/{id}',[BrandController::class,'update'])->name('brand.update');
-        Route::get('/delete/{id}',[BrandController::class,'destroy'])->name('brand.delete');
-    });
-    Route::prefix('category')->group(function (){
-        Route::get('/',[CategoryController::class,'index'])->name('category.list');
-        Route::get('/create',[CategoryController::class,'create'])->name('category.create');
-        Route::post('/create',[CategoryController::class,'store'])->name('category.store');
-        Route::get('/update/{id}',[CategoryController::class,'edit'])->name('category.edit');
-        Route::post('/update/{id}',[CategoryController::class,'update'])->name('category.update');
-        Route::get('/delete/{id}',[CategoryController::class,'destroy'])->name('category.delete');
-    });
+
+
 });
