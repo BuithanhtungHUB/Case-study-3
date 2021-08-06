@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
@@ -28,7 +29,7 @@ class ProductController extends Controller
     public function store(Product $product,CreateProductRequest $request)
     {
         if (!$request->hasFile('image')){
-            $path ='';
+            $path ='images/r5z7GE2rr4jlGNVTCStsQj40BDBl7Ebx3qVgnzNL.jpg';
         }else{
             $path = $request->file('image')->store('images','public');
         }
@@ -51,7 +52,7 @@ class ProductController extends Controller
         return view('admin.products.update',compact('product','brands','categories'));
     }
 
-    public function update(Product $product,UpdateCategoryRequest $request,$id)
+    public function update(Product $product,UpdateProductRequest $request,$id)
     {
         if (!$request->hasFile('image')){
             $product = Product::findOrFail($id);
@@ -61,7 +62,7 @@ class ProductController extends Controller
         }
         $product->image = $path;
         $product->name = $request->name;
-        $product->peice = $request->price;
+        $product->price = $request->price;
         $product->category_id = $request->category;
         $product->brand_id = $request->brand;
         $product->description = $request->description;

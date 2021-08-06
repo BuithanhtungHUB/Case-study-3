@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('admin.dashboard');
+    return view('shop.master');
 });
 Route::prefix('admin')->group(function (){
     Route::prefix('product')->group(function (){
@@ -44,4 +45,12 @@ Route::prefix('admin')->group(function (){
         Route::post('/update/{id}',[CategoryController::class,'update'])->name('category.update');
         Route::get('/delete/{id}',[CategoryController::class,'destroy'])->name('category.delete');
     });
+});
+Route::prefix('shop')->group(function (){
+    Route::get('/home',[CartController::class,'showHome'])->name('shop.home');
+    Route::get('/list',[CartController::class,'index'])->name('shop.list');
+    Route::get('/cart',[CartController::class,'cart'])->name('shop.cart');
+    Route::get('/addToCart/{id}',[CartController::class,'addToCart'])->name('shop.addToCart');
+    Route::get('/deleteCart/{id}',[CartController::class,'deleteCart'])->name('shop.deleteCart');
+    Route::get('/quantity/{id}',[CartController::class,'quantity'])->name('shop.quantity');
 });

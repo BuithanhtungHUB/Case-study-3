@@ -26,6 +26,7 @@ class UpdateProductRequest extends FormRequest
         return [
             'name'=>'required',
             'price'=>'required',
+
         ];
     }
 
@@ -34,6 +35,7 @@ class UpdateProductRequest extends FormRequest
         return [
             'name.required'=>'Kông được để trống',
             'price.required'=>'Kông được để trống',
+
         ];
     }
 }
