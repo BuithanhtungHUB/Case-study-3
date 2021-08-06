@@ -61,8 +61,8 @@
                                     <tr>
                                         <th scope="row">{{$key+1}}</th>
                                         <td>{{$category->name}}</td>
-                                        <td><a href="{{route('brand.edit',$category->id)}}" class="btn btn-warning">Edit</a></td>
-                                        <td><a href="{{route('brand.delete',$category->id)}}" onclick="return confirm('Bạn chắc chắn muốn xóa')" class="btn btn-danger">Delete</a></td>
+                                        <td><a href="{{route('category.edit',$category->id)}}" class="btn btn-warning">Edit</a></td>
+                                        <td><a href="{{route('category.delete',$category->id)}}" onclick="return confirm('Bạn chắc chắn muốn xóa')" class="btn btn-danger">Delete</a></td>
                                     </tr>
                                 @empty
                                     <tr>

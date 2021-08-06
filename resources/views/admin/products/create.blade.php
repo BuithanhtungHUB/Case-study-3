@@ -43,7 +43,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Bland</label>
                                 <div class="col-sm-10">
-                                    <select name="bland" class="form-control">
+                                    <select name="brand" class="form-control">
                                         @forelse($brands as $brand)
                                         <option value="{{$brand->id}}">{{$brand->name}}</option>
                                         @empty

@@ -8,7 +8,7 @@
                 <!-- Basic Form Inputs card start -->
                 <div class="card">
                     <div class="card-header">
-                        <h2>Create Product</h2>
+                        <h2>Update Product</h2>
                         <span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>
                         <div class="card-header-right"><i
                                 class="icofont icofont-spinner-alt-5"></i></div>
@@ -20,7 +20,7 @@
                     </div>
                     <div class="card-block">
                         <h4 class="sub-title">Basic Inputs</h4>
-                        <form method="post" action="{{route('product.edit')}}" enctype="multipart/form-data">
+                        <form method="post" action="{{route('product.update',$product->id)}}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Input Name</label>
@@ -43,8 +43,9 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Bland</label>
                                 <div class="col-sm-10">
-                                    <select name="bland" class="form-control">
+                                    <select name="brand" class="form-control">
                                         @forelse($brands as $brand)
+                                            {{$brand->id}}
                                             <option value="{{$brand->id}}">{{$brand->name}}</option>
                                         @empty
                                             <option>Brand</option>

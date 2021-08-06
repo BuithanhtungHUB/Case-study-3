@@ -64,15 +64,14 @@
                                 @forelse($products as $key => $product)
                                 <tr>
                                     <th scope="row">{{$key+1}}</th>
-                                    <th scope="row">{{$key+1}}</th>
-{{--                                    <td><img src="{{asset('storage/'.$product->image)}}" style="width: 100px; height: 100px"></td>--}}
+                                    <td><img src="{{asset('storage/'.$product->image)}}" style="width: 100px; height: 100px"></td>
                                     <td>{{$product->name}}</td>
                                     <td>{{$product->brand->name}}</td>
                                     <td>{{$product->category->name}}</td>
                                     <td>{{$product->price}}</td>
                                     <td>{{$product->description}}</td>
                                     <td><a href="{{route('product.edit',$product->id)}}" class="btn btn-warning">Edit</a></td>
-                                    <td><a href="{{route('product.delete',$product->id)}}" class="btn btn-danger">Delete</a></td>
+                                    <td><a href="{{route('product.delete',$product->id)}}" class="btn btn-danger" onclick="return confirm('Bạn chắc chắn muốn xóa')">Delete</a></td>
                                 </tr>
                                 @empty
                                     <tr><td colspan="9">No Data</td></tr>
