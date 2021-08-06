@@ -16,11 +16,11 @@ class LoginController extends Controller
     public function login(LoginRequest $request)
     {
        $email = $request ->email;
-       $pasword = $request->password;
+       $password = $request->password;
 
        $data = [
            'email' => $email,
-           'password' =>$pasword
+           'password' =>$password
        ];
 
        if (Auth::attempt($data)) {

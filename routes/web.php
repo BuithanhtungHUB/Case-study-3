@@ -22,12 +22,7 @@ use Illuminate\Support\Facades\Route;
 //    return view('admin.users.update');
 //});
 
-Route::prefix('admin')->group(function () {
 
-
-
-
-});
 Route::prefix('admin')->group(function (){
     Route::get('login', [LoginController::class, 'showFormLogin'])->name('admin.showFromlogin');
     Route::post('login', [LoginController::class, 'login'])->name('admin.login');
