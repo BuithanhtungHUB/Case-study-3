@@ -11,7 +11,6 @@
                             <i class="icofont icofont-table bg-c-blue"></i>
                             <div class="d-inline">
                                 <h4>User List</h4>
-                                <span>lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
                             </div>
                         </div>
                     </div>
@@ -30,6 +29,7 @@
                             </ul>
                         </div>
                     </div>
+
                 </div>
             </div>
             <!-- Page-header end -->
@@ -38,43 +38,41 @@
             <div class="page-body">
                 <!-- Hover table card start -->
                 <div class="card">
-                    <div class="card-header">
-                        <h5>Hover table</h5>
-                        <span>use class <code>table-hover</code> inside table element</span>
-                        <div class="card-header-right">    <ul class="list-unstyled card-option">        <li><i class="icofont icofont-simple-left "></i></li>        <li><i class="icofont icofont-maximize full-card"></i></li>        <li><i class="icofont icofont-minus minimize-card"></i></li>        <li><i class="icofont icofont-refresh reload-card"></i></li>        <li><i class="icofont icofont-error close-card"></i></li>    </ul></div>
-                    </div>
+
                     <div class="card-block table-border-style">
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Username</th>
+                                    <th>Name</th>
+                                    <th>Image</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th></th>
+                                    <th></th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @forelse($users as $user)
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
+                                    <td scope="row">{{ $user->name }}</td>
+                                    <td><img src="{{$user->image}}" alt=""></td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>
+                                        {{$user->role->name}}
+                                    </td>
+                                    <td><a href="{{route('users.edit', $user->id)}}" class="btn btn-info">Edit</a></td>
+                                    <td><a href="" class="btn btn-danger">Delete</a></td>
                                 </tr>
+                                @empty
                                 <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
+                                    <td colspan="3">No data</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
+                                @endforelse
                                 </tbody>
                             </table>
+                            {{$users->links()}}
                         </div>
                     </div>
                 </div>
