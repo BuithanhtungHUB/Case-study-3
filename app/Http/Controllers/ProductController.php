@@ -78,4 +78,11 @@ class ProductController extends Controller
         return redirect()->route('product.list');
 
     }
+
+    public function search($value,Request $request)
+    {
+        $value = $request->value;
+        $products = Product::where('name','LIKE','%'.$value.'%')->get();
+        return response()->json($products);
+    }
 }

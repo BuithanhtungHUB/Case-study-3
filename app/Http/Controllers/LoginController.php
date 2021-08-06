@@ -24,7 +24,7 @@ class LoginController extends Controller
        ];
 
        if (Auth::attempt($data)) {
-           return redirect()->route('users.index');
+           return redirect()->route('product.list');
        }else{
            session()->flash('login_error', 'Account not exits!');
            return redirect()->route('admin.showFromlogin');
