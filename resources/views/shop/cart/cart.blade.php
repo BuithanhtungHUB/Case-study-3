@@ -42,10 +42,8 @@
                                     <tr><td colspan="6"></td></tr>
                                     @endforelse
                                     <tr>
-                                        <td>total bill amount</td>
-
-                                        <td colspan="5" id="totalCart">{{$totalCart}}&nbsp;$</td>
-
+                                        <td><b>Total Payment</b></td>
+                                        <td colspan="5" id="totalCart"><b>{{$totalCart}}&nbsp;$</b></td>
                                     </tr>
                                     </tbody>
                                 </table>
