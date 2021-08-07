@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
+use function Symfony\Component\Translation\t;
+
+
 class CartController extends Controller
 {
     public function showHome()
@@ -21,7 +24,18 @@ class CartController extends Controller
     public function cart()
     {
         $carts = session()->get('cart');
-        return view('shop.cart.cart', compact('carts'));
+
+        if (empty($carts)){
+            $carts = [];
+            session()->put('cart',$carts);
+        }
+        $totalCart = [];
+        foreach ($carts as $cart){
+            $sum = $cart['price']*$cart['quantity'];
+            array_push($totalCart,$sum);
+        }
+        $totalCart = array_sum($totalCart);
+        return view('shop.cart.cart', compact('carts','totalCart'));
     }
 
     public function addToCart($id)
@@ -51,38 +65,58 @@ class CartController extends Controller
                 'quantity' => 1,
             ];
         }
-        session()->put('cart', $carts);
-        $data = [
-            'numbers' => count((array)session('cart')),
-        ];
-        return response()->json($data);
+
+        return $this->getTotalCart($carts);
+
     }
 
     public function deleteCart($id)
     {
         $carts = session()->get('cart');
         unset($carts[$id]);
-        session()->put('cart', $carts);
-        $data = [
-            'numbers' => count((array)session('cart')),
-        ];
-        return response()->json($data);
+
+        return $this->getTotalCart($carts);
     }
 
     public function quantity($id, Request $request)
     {
         $carts = session()->get('cart');
-        if ($request->totalQuantity < 0) {
-            unset($carts[$id]);
-            session()->put('cart', $carts);
-        } else {
-            $carts[$id]['quantity'] = $request->totalQuantity;
-            session()->put('cart', $carts);
+        $carts[$id]['quantity'] = $request->totalQuantity;
+        session()->put('cart', $carts);
+        $totalCart = [];
+        foreach ($carts as $cart){
+            $sum = $cart['price']*$cart['quantity'];
+            array_push($totalCart,$sum);
         }
-
-
-        return response()->json($carts[$id]);
-
-
+        $totalCart = array_sum($totalCart);
+        $data = [
+            'carts'=>$carts[$id],
+            'totalCart'=> $totalCart
+        ];
+        return response()->json($data);
     }
+
+
+    /**
+     * @param $carts
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getTotalCart($carts): \Illuminate\Http\JsonResponse
+    {
+        session()->put('cart', $carts);
+        $totalCart = [];
+        foreach ($carts as $cart) {
+            $sum = $cart['price'] * $cart['quantity'];
+            array_push($totalCart, $sum);
+        }
+        $totalCart = array_sum($totalCart);
+        $data = [
+            'numbers' => count((array)session('cart')),
+            'totalCart' => $totalCart
+        ];
+        return response()->json($data);
+    }
+
+
+
 }
