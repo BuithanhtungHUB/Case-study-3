@@ -44,6 +44,7 @@
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
+                                    <th></th>
                                     <th>Name</th>
                                     <th>Image</th>
                                     <th>Email</th>
@@ -54,16 +55,17 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @forelse($users as $user)
+                                @forelse($users as $key => $user)
                                 <tr>
-                                    <td scope="row">{{ $user->name }}</td>
-                                    <td><img src="{{$user->image}}" alt=""></td>
+                                    <td scope="row">{{ $key+1 }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td><img src="{{asset('storage/'.$user->image)}}" alt=""></td>
                                     <td>{{ $user->email }}</td>
                                     <td>
                                         {{$user->role->name}}
                                     </td>
                                     <td><a href="{{route('users.edit', $user->id)}}" class="btn btn-info">Edit</a></td>
-                                    <td><a href="" class="btn btn-danger">Delete</a></td>
+                                    <td><a href="{{route('users.delete', $user->id)}}" class="btn btn-danger" onclick="return confirm('Ban co muon xoa user nay')">Delete</a></td>
                                 </tr>
                                 @empty
                                 <tr>
