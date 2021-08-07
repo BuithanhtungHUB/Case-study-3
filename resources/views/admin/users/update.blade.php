@@ -8,8 +8,8 @@
                 <!-- Basic Form Inputs card start -->
                 <div class="card">
                     <div class="card-header">
-                        <h2>Create Category</h2>
-                        <span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>
+                        <h2>Update User</h2>
+
                         <div class="card-header-right"><i
                                 class="icofont icofont-spinner-alt-5"></i></div>
 
@@ -19,7 +19,7 @@
 
                     </div>
                     <div class="card-block">
-                        <h4 class="sub-title">Edit User</h4>
+                        <h4 class="sub-title">Edit Information Of User</h4>
                         <form method="post" action="{{route('users.update',$user->id)}}"  enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
@@ -58,21 +58,20 @@
                                 <div class="col-sm-10">
                                     <img src="{{asset('storage/'.$user->image)}}" alt="">
                                 </div>
+
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 col-form-label">Role</label>
-                                @foreach($roles as $role)
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="role" id="inlineRadio1" value="{{$role->id}}">
-                                    <label class="form-check-label">{{$role->name}}</label>
-                                </div>
-
-                                @endforeach
-
-
+                                    <select name="role" class="form-control">
+                                        @forelse($roles as $role)
+                                            <option value="{{$role->id}}">{{$role->name}}</option>
+                                        @empty
+                                            <option>Role</option>
+                                        @endforelse
+                                    </select>
                             </div>
-                            <button type="submit" class="btn btn-success">Submit</button>
-                            <a href="{{route('users.index')}}" class="btn btn-success">Back</a>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <a href="{{route('users.index')}}" class="btn btn-secondary">Back</a>
                         </form>
                     </div>
                 </div>

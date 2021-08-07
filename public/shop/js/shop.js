@@ -1,7 +1,9 @@
 $(document).ready(function () {
+
     let origin = window.location.origin
     $('.addToCart').click(function () {
         let cartId = $(this).attr('cart')
+
         $.ajax({
             url: origin + '/shop/addToCart/' + cartId,
             method: 'GET',
@@ -9,7 +11,9 @@ $(document).ready(function () {
             success: function (res) {
                 let counts = res.numbers
                 $('#count').html(counts)
+
                 $('#totalCart').html(res.totalCart+'&nbsp;$')
+
                 toastr.success('Bạn đã thêm mới 1 sản phẩm vào gỏi hàng', {timeout: 900})
             },
             error: function () {
@@ -21,6 +25,7 @@ $(document).ready(function () {
     $('.remove').click(function () {
         if (confirm('Bạn chắc chắn muốn xóa?')) {
             let cartId = $(this).attr('delete')
+
             removeCart(cartId)
         }
     });
@@ -77,5 +82,6 @@ $(document).ready(function () {
               console.log(res)
             },
         });
+
     });
 });

@@ -73,7 +73,9 @@
                     <!-- Left nav -->
                     <ul class="nav navbar-nav">
                         <li><a href="{{route('shop.home')}}">Home</a></li>
+
                         <li><a href="{{route('shop.list')}}">Shop</a></li>
+
                         <li><a href="#">Men <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Casual</a></li>
@@ -88,6 +90,7 @@
                                 </li>
                             </ul>
                         </li>
+
                     </ul>
                 </div>
             </div>
@@ -173,10 +176,12 @@
                                             <p><span class="fa fa-envelope"></span>dailyshop@gmail.com</p>
                                         </address>
                                         <div class="aa-footer-social">
+
                                             <a href=""><i class="fab fa-facebook"></i></a>
                                             <a href=""><i class="fab fa-twitter-square"></i></a>
                                             <a href=""><i class="fab fa-google-plus"></i></a>
                                             <a href=""><i class="fab fa-youtube"></i></a>
+
                                         </div>
                                     </div>
                                 </div>
@@ -193,8 +198,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="aa-footer-bottom-area">
+
                         <p>Designed by <a href="http://www.markups.io/">MarkUps.io</a>. Downloaded from <a
                                 href="https://themeslab.org/" target="_blank">Themeslab</a></p>
+
                         <div class="aa-footer-payment">
                             <span class="fa fa-cc-mastercard"></span>
                             <span class="fa fa-cc-visa"></span>
@@ -221,8 +228,10 @@
                     <label for="">Password<span>*</span></label>
                     <input type="password" placeholder="Password">
                     <button class="aa-browse-btn" type="submit">Login</button>
+
                     <label for="rememberme" class="rememberme"><input type="checkbox" id="rememberme"> Remember me
                     </label>
+
                     <p class="aa-lost-password"><a href="#">Lost your password?</a></p>
                     <div class="aa-register-now">
                         Don't have an account?<a href="account.html">Register now!</a>

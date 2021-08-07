@@ -12,27 +12,13 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    function create() {
-
-        $roles = Role::all();
-        return view('admin.users.create', compact('roles'));
+    function showDashboard() {
+        return view('admin.dashboard');
     }
 
-    function store(RegisterRequest $request) {
-
-        // tao users
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->role_id = 2;
-        $user->save();
-
-        //them role users
-//        $user->roles()->sync($request->roles);
-        session()->flash('add_success', 'Add new users successfully!');
-        return redirect()->route('admin.showFromlogin');
-
+    function create() {
+        $roles = Role::all();
+        return view('admin.users.create', compact('roles'));
     }
 
     function index() {
@@ -40,8 +26,32 @@ class UserController extends Controller
         return view('admin.users.list', compact('users'));
     }
 
+    function store(User $user, RegisterRequest $request)
+    {
+        if(!$request->hasFile('image')){
+            $path = $path ='images/r5z7GE2rr4jlGNVTCStsQj40BDBl7Ebx3qVgnzNL.jpg';
+        }else{
+            $path = $request->file('image')->store('images','public');
+        }
+        // tao users
+//        $user = new User();
+        $user->name = $request->name;
+        $user->image = $path;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role_id = 2;
+        $user->save();
+        return redirect()->route('admin.showFromlogin');
+
+        //them role users
+//        $user->roles()->sync($request->roles);
+//        session()->flash('add_success', 'Add new users successfully!');
+
+    }
+
     public function edit($id)
     {
+
         $user = User::findOrFail($id);
         $roles = Role::all();
         return view('admin.users.update', compact('user','roles'));
@@ -49,22 +59,28 @@ class UserController extends Controller
 
     public function update(Request $request, User $user, $id)
     {
+        if (!$request->hasFile('image')){
+            $user = User::findOrFail($id);
+            $path = $user->image;
+        }else{
+            $path = $request->file('image')->store('image','public');
+        }
+//
         $users = User::findOrFail($id);
-        $path = $users->image;
         $password = $users->password;
         $user->name = $request->name;
         $user->image = $path;
         $user->email = $request->email;
         $user->password =$password;
         $user->role_id = $request->role;
-
         $user->save();
+        return redirect()->route('users.index');
     }
 
     function delete($id){
 
         $user = User::findOrFail($id);
         $user->delete();
-        return response()->json(['message' => __('message.delete_success')]);
+        return redirect()->route('users.index');
     }
 }

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+
 use function Symfony\Component\Translation\t;
+
 
 class CartController extends Controller
 {
@@ -22,6 +24,7 @@ class CartController extends Controller
     public function cart()
     {
         $carts = session()->get('cart');
+
         if (empty($carts)){
             $carts = [];
             session()->put('cart',$carts);
@@ -62,13 +65,16 @@ class CartController extends Controller
                 'quantity' => 1,
             ];
         }
+
         return $this->getTotalCart($carts);
+
     }
 
     public function deleteCart($id)
     {
         $carts = session()->get('cart');
         unset($carts[$id]);
+
         return $this->getTotalCart($carts);
     }
 
@@ -90,6 +96,7 @@ class CartController extends Controller
         return response()->json($data);
     }
 
+
     /**
      * @param $carts
      * @return \Illuminate\Http\JsonResponse
@@ -109,6 +116,7 @@ class CartController extends Controller
         ];
         return response()->json($data);
     }
+
 
 
 }

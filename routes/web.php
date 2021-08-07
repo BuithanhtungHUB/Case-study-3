@@ -19,9 +19,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
     return view('admin.dashboard');
 });
+
 Route::prefix('admin')->group(function (){
     Route::get('login', [LoginController::class, 'showFormLogin'])->name('admin.showFromlogin');
     Route::post('login', [LoginController::class, 'login'])->name('admin.login');
@@ -70,6 +72,8 @@ Route::prefix('shop')->group(function (){
     Route::get('/addToCart/{id}',[CartController::class,'addToCart'])->name('shop.addToCart');
     Route::get('/deleteCart/{id}',[CartController::class,'deleteCart'])->name('shop.deleteCart');
     Route::get('/quantity/{id}',[CartController::class,'quantity'])->name('shop.quantity');
+
     Route::get('/update',[CartController::class,'update'])->name('shop.update');
     Route::get('/search/{value}',[ProductController::class,'search'])->name('shop.search');
+
 });
