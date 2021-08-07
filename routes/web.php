@@ -72,4 +72,7 @@ Route::prefix('shop')->group(function (){
     Route::get('/quantity/{id}',[CartController::class,'quantity'])->name('shop.quantity');
     Route::get('/update',[CartController::class,'update'])->name('shop.update');
     Route::get('/search/{value}',[ProductController::class,'search'])->name('shop.search');
+    Route::get('/filterCategory/{id}',[ProductController::class,'filterCategory']);
+    Route::get('/filterBrand/{value}',[ProductController::class,'filterBrand']);
+    Route::get('/detail/{id}',[ProductController::class,'detailProduct'])->name('product.detail');
 });

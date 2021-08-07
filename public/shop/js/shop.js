@@ -1,6 +1,7 @@
 $(document).ready(function () {
     let origin = window.location.origin
-    $('.addToCart').click(function () {
+    // $('.addToCart').click(function () {
+    $(document).on('click', '.addToCart' , function (){
         let cartId = $(this).attr('cart')
         $.ajax({
             url: origin + '/shop/addToCart/' + cartId,
@@ -66,16 +67,136 @@ $(document).ready(function () {
     }
     $('#search-name').on('input',function (){
         let input = $('#search-name').val()
+        console.log(input)
+        if (input !='') {
+            $.ajax({
+                url: origin + '/shop/search/' + input,
+                method: 'GET',
+                type: 'json',
+                data: {
+                    value: input
+                },
+                success: function (res) {
+                    console.log(res)
+                    display(res)
+                },
+                error: function (res) {
+                    console.log(res);
+                }
+            });
+        }else {
+            // location.reload();
+            $.ajax({
+                url: origin + '/api/shop/list/',
+                method: 'GET',
+                type: 'json',
+                success: function (res) {
+                    display(res)
+                },
+            });
+        }
+    });
+    function display(arr){
+        let data = ''
+        for (let i =0; i < arr.length; i ++ ){
+            data += `
+                        <ul class="aa-product-catg">
+                            <!-- start single product item -->
+                            <li>
+                                <figure>
+                                    <a class="aa-product-img"><img src="../../storage/${arr[i].image}" style="width: 250px;height: 300px"></a>
+                                    <a class="aa-add-card-btn addToCart" cart="${arr[i].id}"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+                                    <figcaption>
+                                        <h4 class="aa-product-title">${arr[i].name}</h4>
+                                        <span class="aa-product-price">${arr[i].price}&nbsp;$</span>
+                                    </figcaption>
+                                </figure>
+                                <div class="aa-product-hvr-content">
+                                     <a data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="far fa-heart"></span></a>
+                                    <a data-toggle="tooltip" data-placement="top" title="Compare"><span class="fas fa-exchange-alt"></span></a>
+                                    <a class="detailPro" detail="${arr[i].id}" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
+                                </div>
+                                <!-- product badge -->
+                                <span class="aa-badge aa-sale" href="#">SALE!</span>
+                            </li>
+                        </ul>`
+        }
+        $('.search-product').html(data)
+    }
+
+    // $('.category-name').click(function (){
+    $(document).on('click', '.category-name' , function (){
+        let categoryId = $(this).attr('cate')
+        filterCategory(categoryId)
+    });
+    function filterCategory(categoryId){
         $.ajax({
-           url:origin +'/search/' + input,
+            url:origin +'/shop/filterCategory/' + categoryId,
             method:'GET',
             type:'json',
-            data: {
-               value: input
-            },
             success:function (res){
-              console.log(res)
+                display(res)
             },
-        });
+        })
+    }
+    // $('.brand-name').click(function (){
+    $(document).on('click', '.brand-name' , function (){
+        let brandId = $(this).attr('brand')
+        filterBrand(brandId)
     });
+    function filterBrand(brandId){
+        $.ajax({
+            url:origin +'/shop/filterBrand/' + brandId,
+            method:'GET',
+            type:'json',
+            success:function (res){
+                display(res)
+            },
+        })
+    }
+
+    // $('.detail-pro').click(function (){
+    $(document).on('click', '.detailPro' , function (){
+        let proId = $(this).attr('detail')
+        $.ajax({
+            url: origin + '/shop/detail/' + proId,
+            method:'GET',
+            type:'json',
+            success:function (res){
+                display2(res)
+            }
+        })
+    })
+    function display2(arr){
+        let data = `
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="aa-product-view-slider">
+                                                    <div class="simpleLens-gallery-container" id="demo-1">
+                                                        <div class="simpleLens-container">
+                                                            <div class="simpleLens-big-image-container">
+                                                                <a class="simpleLens-lens-image" data-lens-image="img/view-slider/large/polo-shirt-1.png">
+                                                                    <img src="../../storage/${arr.product.image}" style="width: 250px;height: 300px" class="simpleLens-big-image">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Modal view content -->
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <div class="aa-product-view-content">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <div class="aa-product-view-content">
+                                                            <h3>${arr.product.name}</h3>
+                                                                <p class="aa-product-avilability text-danger"> Price:&nbsp;<span class="aa-product-view-price">${arr.product.price}&nbsp;$</span></p>
+                                                                <p class="aa-product-avilability text-orengen">Brand:&nbsp;<span>${arr.brand}</span></p>
+                                                                <p class="aa-product-avilability">Category:&nbsp;<span>${arr.category}</span></p>
+                                                                <p class="aa-product-avilability">Description:&nbsp;<span>${arr.product.description}</span></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>`
+        $('.detail-content').html(data)
+    }
+
 });

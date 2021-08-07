@@ -79,10 +79,46 @@ class ProductController extends Controller
 
     }
 
-    public function search($value,Request $request)
+    public function search($input)
     {
-        $value = $request->value;
-        $products = Product::where('name','LIKE','%'.$value.'%')->get();
+        if (!empty($input)){
+            $value = $input;
+            $products = Product::where('name', 'LIKE', '%' . $value . '%')->get();
+        }else {
+            $products = Product::all();
+        }
         return response()->json($products);
+    }
+
+    public function filterCategory($id)
+    {
+        $products = Product::where('category_id','LIKE','%'.$id.'%')->get();
+        return response()->json($products);
+    }
+    public function filterBrand($input)
+    {
+        $products = Product::where('brand_id','LIKE','%'.$input.'%')->get();
+        return response()->json($products);
+    }
+
+    public function detailProduct($id)
+    {
+        $product = Product::findOrFail($id);
+        $brand =$product->brand->name;
+        $category = $product->category->name;
+        $data = [
+            'product'=>$product,
+            'brand'=>$brand,
+            'category'=>$category
+
+        ];
+        return response()->json($data);
+    }
+
+    public function getList()
+    {
+        $products = Product::all();
+        return response()->json($products);
+//        return view('shop.product.list', compact('products','brands','categories'));
     }
 }

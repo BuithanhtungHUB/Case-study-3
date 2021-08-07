@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use function Symfony\Component\Translation\t;
@@ -16,7 +18,9 @@ class CartController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('shop.product.list', compact('products'));
+        $categories = Category::all();
+        $brands = Brand::all();
+        return view('shop.product.list', compact('products','brands','categories'));
     }
 
     public function cart()
