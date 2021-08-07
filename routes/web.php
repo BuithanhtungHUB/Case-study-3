@@ -63,6 +63,12 @@ Route::prefix('admin')->group(function (){
             Route::get('/delete/{id}',[CategoryController::class,'destroy'])->name('category.delete');
         });
     });
-
-
+});
+Route::prefix('shop')->group(function (){
+    Route::get('/home',[CartController::class,'showHome'])->name('shop.home');
+    Route::get('/list',[CartController::class,'index'])->name('shop.list');
+    Route::get('/cart',[CartController::class,'cart'])->name('shop.cart');
+    Route::get('/addToCart/{id}',[CartController::class,'addToCart'])->name('shop.addToCart');
+    Route::get('/deleteCart/{id}',[CartController::class,'deleteCart'])->name('shop.deleteCart');
+    Route::get('/quantity/{id}',[CartController::class,'quantity'])->name('shop.quantity');
 });

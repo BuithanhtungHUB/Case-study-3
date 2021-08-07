@@ -34,7 +34,7 @@ class CreateProductRequest extends FormRequest
         return [
             'name.required'=>'Không được để trống',
             'name.unique'=>'Tên đã tồn tại',
-            'price'=>'Không được để trống',
+            'price.required'=>'Không được để trống',
         ];
     }
 }

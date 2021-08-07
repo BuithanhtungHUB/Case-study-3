@@ -21,6 +21,7 @@
                     <div class="card-block">
                         <h4 class="sub-title">Basic Inputs</h4>
                         <form method="post" action="{{route('brand.update',$brand->id)}}">
+                            @csrf
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Simple Input</label>
                                 <div class="col-sm-10">
