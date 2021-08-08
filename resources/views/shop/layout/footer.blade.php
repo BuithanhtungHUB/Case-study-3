@@ -20,8 +20,8 @@
 <!-- Price picker slider -->
 <script type="text/javascript" src="{{asset('shop/js/nouislider.js')}}"></script>
 <!-- Custom js -->
-<script src="{{asset('shop/js/custom.js')}}"></script>
 <script src="{{asset('shop/js/shop.js')}}"></script>
+<script src="{{asset('shop/js/custom.js')}}"></script>
 
 
 

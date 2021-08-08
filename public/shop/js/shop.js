@@ -3,6 +3,7 @@ $(document).ready(function () {
     // $('.addToCart').click(function () {
     $(document).on('click', '.addToCart' , function (){
         let cartId = $(this).attr('cart')
+        console.log(cartId)
         $.ajax({
             url: origin + '/shop/addToCart/' + cartId,
             method: 'GET',
@@ -20,6 +21,8 @@ $(document).ready(function () {
     });
 
     $('.remove').click(function () {
+        // console.log(1)
+    // $(document).on('click', '.remove' , function (){
         if (confirm('Bạn chắc chắn muốn xóa?')) {
             let cartId = $(this).attr('delete')
             removeCart(cartId)
@@ -61,13 +64,13 @@ $(document).ready(function () {
                 $('#totalCart').html(res.totalCart+'&nbsp;$')
             },
             error: function () {
+
                 toastr.error('that bai', {timeout: 900})
             }
         });
     }
     $('#search-name').on('input',function (){
         let input = $('#search-name').val()
-        console.log(input)
         if (input !='') {
             $.ajax({
                 url: origin + '/shop/search/' + input,
@@ -124,9 +127,10 @@ $(document).ready(function () {
         $('.search-product').html(data)
     }
 
-    // $('.category-name').click(function (){
-    $(document).on('click', '.category-name' , function (){
+    $('.category-name').click(function (){
+    // $(document).on('click', '.category-name' , function (){
         let categoryId = $(this).attr('cate')
+        // console.log(categoryId)
         filterCategory(categoryId)
     });
     function filterCategory(categoryId){
@@ -135,12 +139,13 @@ $(document).ready(function () {
             method:'GET',
             type:'json',
             success:function (res){
+                console.log(res)
                 display(res)
             },
         })
     }
-    // $('.brand-name').click(function (){
-    $(document).on('click', '.brand-name' , function (){
+    $('.brand-name').click(function (){
+    // $(document).on('click', '.brand-name' , function (){
         let brandId = $(this).attr('brand')
         filterBrand(brandId)
     });
@@ -163,6 +168,7 @@ $(document).ready(function () {
             method:'GET',
             type:'json',
             success:function (res){
+                // console.log(res)
                 display2(res)
             }
         })
@@ -189,7 +195,7 @@ $(document).ready(function () {
                                                         <div class="aa-product-view-content">
                                                             <h3>${arr.product.name}</h3>
                                                                 <p class="aa-product-avilability text-danger"> Price:&nbsp;<span class="aa-product-view-price">${arr.product.price}&nbsp;$</span></p>
-                                                                <p class="aa-product-avilability text-orengen">Brand:&nbsp;<span>${arr.brand}</span></p>
+                                                                <p class="aa-product-avilability">Brand:&nbsp;<span>${arr.brand}</span></p>
                                                                 <p class="aa-product-avilability">Category:&nbsp;<span>${arr.category}</span></p>
                                                                 <p class="aa-product-avilability">Description:&nbsp;<span>${arr.product.description}</span></p>
                                                         </div>
@@ -198,5 +204,19 @@ $(document).ready(function () {
                                             </div>`
         $('.detail-content').html(data)
     }
+    $('.filter-price').on('input',function (){
+        let price = $(this).val()
+        $.ajax({
+            url: origin + '/shop/filterPrice/' + price,
+            method:'GET',
+            type:'json',
+            data:{
+              value:price,
+            },
+            success:function (res){
+                display(res)
+            }
+        })
+    });
 
 });

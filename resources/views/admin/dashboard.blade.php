@@ -93,7 +93,6 @@
                 </div>
 
 
-
                 <div class="col-md-12 col-xl-4">
                     <div class="card fb-card">
                         <div class="card-header">
@@ -198,7 +197,8 @@
                                         <td>
                                             <p class="d-inline-block m-r-20">4 : 36</p>
                                             <div class="progress d-inline-block">
-                                                <div class="progress-bar bg-c-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:80%">
+                                                <div class="progress-bar bg-c-blue" role="progressbar" aria-valuemin="0"
+                                                     aria-valuemax="100" style="width:80%">
                                                 </div>
                                             </div>
                                         </td>
@@ -213,7 +213,8 @@
                                         <td>
                                             <p class="d-inline-block m-r-20">4 : 36</p>
                                             <div class="progress d-inline-block">
-                                                <div class="progress-bar bg-c-pink" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:60%">
+                                                <div class="progress-bar bg-c-pink" role="progressbar" aria-valuemin="0"
+                                                     aria-valuemax="100" style="width:60%">
                                                 </div>
                                             </div>
                                         </td>
@@ -228,7 +229,8 @@
                                         <td>
                                             <p class="d-inline-block m-r-20">4 : 36</p>
                                             <div class="progress d-inline-block">
-                                                <div class="progress-bar bg-c-yellow" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:50%">
+                                                <div class="progress-bar bg-c-yellow" role="progressbar"
+                                                     aria-valuemin="0" aria-valuemax="100" style="width:50%">
                                                 </div>
                                             </div>
                                         </td>
@@ -243,7 +245,8 @@
                                         <td>
                                             <p class="d-inline-block m-r-20">4 : 36</p>
                                             <div class="progress d-inline-block">
-                                                <div class="progress-bar bg-c-green" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:50%">
+                                                <div class="progress-bar bg-c-green" role="progressbar"
+                                                     aria-valuemin="0" aria-valuemax="100" style="width:50%">
                                                 </div>
                                             </div>
                                         </td>
@@ -258,7 +261,8 @@
                                         <td>
                                             <p class="d-inline-block m-r-20">4 : 36</p>
                                             <div class="progress d-inline-block">
-                                                <div class="progress-bar bg-c-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:50%">
+                                                <div class="progress-bar bg-c-blue" role="progressbar" aria-valuemin="0"
+                                                     aria-valuemax="100" style="width:50%">
                                                 </div>
                                             </div>
                                         </td>
@@ -276,7 +280,7 @@
                                 <h5>To do list</h5>
                             </div>
                             <div class="card-header-right">
-                                <button class="btn btn-card btn-primary">Add task </button>
+                                <button class="btn btn-card btn-primary">Add task</button>
                             </div>
                         </div>
                         <div class="card-block">
@@ -287,10 +291,13 @@
                                         <span class="cr">
                                                                         <i class="cr-icon icofont icofont-ui-check txt-default"></i>
                                                                     </span>
-                                        <span><h6>Schedule Meeting with Compnes <span class="label bg-c-green m-l-10 f-10">2 week</span></h6></span>
+                                        <span><h6>Schedule Meeting with Compnes <span
+                                                    class="label bg-c-green m-l-10 f-10">2 week</span></h6></span>
                                         <div class="task-card-img m-l-40">
-                                            <a href="#!"><img src="assets/images/avatar-2.jpg" data-toggle="tooltip" title="Lary Doe" alt="" class="img-40"></a>
-                                            <a href="#!"><img src="assets/images/avatar-3.jpg" data-toggle="tooltip" title="Alia" alt="" class="img-40 m-l-10"></a>
+                                            <a href="#!"><img src="assets/images/avatar-2.jpg" data-toggle="tooltip"
+                                                              title="Lary Doe" alt="" class="img-40"></a>
+                                            <a href="#!"><img src="assets/images/avatar-3.jpg" data-toggle="tooltip"
+                                                              title="Alia" alt="" class="img-40 m-l-10"></a>
                                         </div>
                                     </label>
                                 </div>
@@ -313,12 +320,17 @@
                                         <span class="cr">
                                                                         <i class="cr-icon icofont icofont-ui-check txt-default"></i>
                                                                     </span>
-                                        <span><h6>Create template, admin with responsive<span class="label bg-c-pink m-l-10">2 week</span></h6></span>
+                                        <span><h6>Create template, admin with responsive<span
+                                                    class="label bg-c-pink m-l-10">2 week</span></h6></span>
                                         <div class="task-card-img m-l-40">
-                                            <a href="#!"><img src="assets/images/avatar-2.jpg" data-toggle="tooltip" title="Alia" alt="" class="img-40"></a>
-                                            <a href="#!"><img src="assets/images/avatar-3.jpg" data-toggle="tooltip" title="Suzen" alt="" class="img-40 m-l-10"></a>
-                                            <a href="#!"><img src="assets/images/avatar-4.jpg" data-toggle="tooltip" title="Lary Doe" alt="" class="img-40 m-l-10"></a>
-                                            <a href="#!"><img src="assets/images/avatar-2.jpg" data-toggle="tooltip" title="Josephin Doe" alt="" class="img-40 m-l-10"></a>
+                                            <a href="#!"><img src="assets/images/avatar-2.jpg" data-toggle="tooltip"
+                                                              title="Alia" alt="" class="img-40"></a>
+                                            <a href="#!"><img src="assets/images/avatar-3.jpg" data-toggle="tooltip"
+                                                              title="Suzen" alt="" class="img-40 m-l-10"></a>
+                                            <a href="#!"><img src="assets/images/avatar-4.jpg" data-toggle="tooltip"
+                                                              title="Lary Doe" alt="" class="img-40 m-l-10"></a>
+                                            <a href="#!"><img src="assets/images/avatar-2.jpg" data-toggle="tooltip"
+                                                              title="Josephin Doe" alt="" class="img-40 m-l-10"></a>
                                         </div>
                                     </label>
                                 </div>
@@ -333,9 +345,12 @@
                                         <span><h6>Meeting With HOD's and borad</h6>
                                                                         <p class="text-muted m-l-40">23 january 2003</p></span>
                                         <div class="task-card-img m-l-40">
-                                            <a href="#!"><img src="assets/images/avatar-2.jpg" data-toggle="tooltip" title="Lary Doe" alt="" class="img-40"></a>
-                                            <a href="#!"><img src="assets/images/avatar-3.jpg" data-toggle="tooltip" title="Alia" alt="" class="img-40 m-l-10"></a>
-                                            <a href="#!"><img src="assets/images/avatar-2.jpg" data-toggle="tooltip" title="Josephin Doe" alt="" class="img-40 m-l-10"></a>
+                                            <a href="#!"><img src="assets/images/avatar-2.jpg" data-toggle="tooltip"
+                                                              title="Lary Doe" alt="" class="img-40"></a>
+                                            <a href="#!"><img src="assets/images/avatar-3.jpg" data-toggle="tooltip"
+                                                              title="Alia" alt="" class="img-40 m-l-10"></a>
+                                            <a href="#!"><img src="assets/images/avatar-2.jpg" data-toggle="tooltip"
+                                                              title="Josephin Doe" alt="" class="img-40 m-l-10"></a>
                                         </div>
                                     </label>
                                 </div>

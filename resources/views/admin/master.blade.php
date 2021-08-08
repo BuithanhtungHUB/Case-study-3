@@ -86,7 +86,7 @@
                     <a class="mobile-search morphsearch-search" href="#">
                         <i class="ti-search"></i>
                     </a>
-                    <a href="{{route('admin.showDashboard')}}">
+                    <a href="{{route('admin.dashboard')}}">
                         <img class="img-fluid" src="{{asset('assets/images/adminlabs-logo.png')}}" alt="Theme-Logo"/>
                     </a>
                     <a class="mobile-options">
@@ -166,7 +166,7 @@
                         <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Layout</div>
                         <ul class="pcoded-item pcoded-left-item">
                             <li class="active">
-                                <a href="{{route('admin.showDashboard')}}">
+                                <a href="{{route('admin.dashboard')}}">
                                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                     <span class="pcoded-mcaret"></span>
