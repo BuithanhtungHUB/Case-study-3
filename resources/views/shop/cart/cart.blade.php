@@ -43,7 +43,9 @@
                                     @endforelse
                                     <tr>
                                         <td>total bill amount</td>
-                                        <td colspan="5">$</td>
+
+                                        <td colspan="5" id="totalCart">{{$totalCart}}&nbsp;$</td>
+
                                     </tr>
                                     </tbody>
                                 </table>

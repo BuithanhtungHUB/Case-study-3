@@ -26,10 +26,12 @@ class LoginController extends Controller
        ];
 
        if (Auth::attempt($data)) {
+
            if (!Gate::allows('loginAdmin')){
                return redirect()->route('shop.home');
            }
            return redirect()->route('admin.showDashboard');
+
        }else{
            session()->flash('login_error', 'Account not exits!');
            return redirect()->route('admin.showFromlogin');

@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+<<<<<<< HEAD
+=======
+
+Route::get('/', function () {
+    return view('admin.dashboard');
+});
+>>>>>>> 0748ec7346f19510ce220fef480193fa18650eea
 
 Route::get('/',[CartController::class,'showHome'])->name('shop.home');
 Route::prefix('admin')->group(function (){
@@ -70,4 +78,8 @@ Route::prefix('shop')->group(function (){
     Route::get('/addToCart/{id}',[CartController::class,'addToCart'])->name('shop.addToCart');
     Route::get('/deleteCart/{id}',[CartController::class,'deleteCart'])->name('shop.deleteCart');
     Route::get('/quantity/{id}',[CartController::class,'quantity'])->name('shop.quantity');
+
+    Route::get('/update',[CartController::class,'update'])->name('shop.update');
+    Route::get('/search/{value}',[ProductController::class,'search'])->name('shop.search');
+
 });
