@@ -31,31 +31,21 @@ class UserController extends Controller
         if (!Gate::allows('loginAdmin')) {
             abort(403);
         }
-        $users = User::orDerBy('id','DESC')->paginate(20);
+        $users = User::orDerBy('id','DESC')->paginate(5);
         return view('admin.users.list', compact('users'));
     }
 
     function store(User $user, RegisterRequest $request)
     {
-        if (!Gate::allows('loginAdmin')) {
-            abort(403);
-        }else{
-            if(!$request->hasFile('image')){
-                $path = $path ='images/r5z7GE2rr4jlGNVTCStsQj40BDBl7Ebx3qVgnzNL.jpg';
-            }else{
-                $path = $request->file('image')->store('images','public');
-            }
+            $path = 'images/JgMQEMsr6dD8rFpZhEGut5bMQY6QZj54yVHFSFW8.png';
             $user->name = $request->name;
             $user->image = $path;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
             $user->role_id = 2;
             $user->save();
+             toastr()->success('Thêm mới thành công');
             return redirect()->route('admin.showFromlogin');
-        }
-
-
-
     }
 
     public function edit($id)
@@ -73,20 +63,20 @@ class UserController extends Controller
         if (!Gate::allows('loginAdmin')) {
             abort(403);
         }else{
+            $user = User::findOrFail($id);
             if (!$request->hasFile('image')){
-                $user = User::findOrFail($id);
                 $path = $user->image;
             }else{
-                $path = $request->file('image')->store('image','public');
+                $path = $request->file('image')->store('images','public');
             }
-            $users = User::findOrFail($id);
-            $password = $users->password;
+            $password = $user->password;
             $user->name = $request->name;
             $user->image = $path;
             $user->email = $request->email;
             $user->password =$password;
             $user->role_id = $request->role;
             $user->save();
+            toastr()->success('Update thành công');
             return redirect()->route('users.index');
         }
     }
@@ -97,6 +87,31 @@ class UserController extends Controller
         }
         $user = User::findOrFail($id);
         $user->delete();
+        toastr()->success('Xóa thành công');
         return redirect()->route('users.index');
     }
+
+    public function profileUser($id)
+    {
+        $user = User::findOrFail($id);
+        return view('shop.profile.profile',compact('user'));
+    }
+
+    public function editProfile(Request $request,$id)
+    {
+        $user = User::findOrFail($id);
+        if (!$request->hasFile('image')){
+            $path = $user->image;
+        }else{
+            $path = $request->file('image')->store('images','public');
+        }
+        $pass = $user->password;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->image = $path;
+        $user->password = $pass;
+        $user->save();
+        return redirect()->route('user.profile',$user->id);
+    }
+
 }

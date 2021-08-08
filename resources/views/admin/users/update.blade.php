@@ -35,28 +35,10 @@
                                     <input type="text" name="email" value="{{$user->email}}" class="form-control " readonly>
                                 </div>
                             </div>
-{{--                            <div class="form-group row">--}}
-{{--                                <label class="col-sm-2 col-form-label">Password</label>--}}
-{{--                                <div class="col-sm-10">--}}
-{{--                                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror">--}}
-{{--                                    @error('password')--}}
-{{--                                    <p class="text-danger">{{$message}}</p>--}}
-{{--                                    @enderror--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group row">--}}
-{{--                                <label class="col-sm-2 col-form-label"></label>--}}
-{{--                                <div class="col-sm-10">--}}
-{{--                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror">--}}
-{{--                                    @error('name')--}}
-{{--                                    <p class="text-danger">{{$message}}</p>--}}
-{{--                                    @enderror--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Image</label>
                                 <div class="col-sm-10">
-                                    <img src="{{asset('storage/'.$user->image)}}" alt="">
+                                    <img src="{{asset('storage/'.$user->image)}}" style="width: 150px;height: 150px">
                                 </div>
 
                             </div>

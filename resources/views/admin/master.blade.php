@@ -31,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/jquery.mCustomScrollbar.css')}}">
 </head>
-
+@toastr_css
 <body>
 <!-- Pre-loader start -->
 <div class="theme-loader">
@@ -110,7 +110,7 @@
 
                         <li class="user-profile header-notification">
                             <a href="#!">
-                                <img src="{{asset('assets/images/user.png')}}" class="img-radius"
+                                <img src="{{asset('storage/'.auth()->user()->image)}}" class="img-radius"
                                      alt="User-Profile-Image">
                                 <span>{{  auth()->user()->name }}</span>
                                 <i class="ti-angle-down"></i>
@@ -236,12 +236,7 @@
                 </div>
             </div>
         </div>
-        <div class="fixed-button">
-            <a href="https://codedthemes.com/item/guru-able-admin-template/" target="_blank"
-               class="btn btn-md btn-primary">. Downloaded from <a href="https://themeslab.org/" target="_blank">Themeslab</a>
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Upgrade To Pro
-            </a>
-        </div>
+
     </div>
 </div>
 
@@ -281,5 +276,6 @@
     });
 </script>
 </body>
-
+@toastr_js
+@toastr_render
 </html>

@@ -1,4 +1,5 @@
 @extends('shop.master')
+@section('title','Shop Cart')
 @section('content')
 <!-- catg header banner section -->
 <section id="aa-catg-head-banner">

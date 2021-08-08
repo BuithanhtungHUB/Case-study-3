@@ -26,11 +26,8 @@
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
 </head>
-
+@toastr_css
 <body class="fix-menu">
-@if(session()->has('login_error'))
-    {{session('login_error')}}
-@endif
 <!-- Pre-loader start -->
 <div class="theme-loader">
     <div class="ball-scale">
@@ -162,5 +159,6 @@
 <script type="text/javascript" src="{{asset('assets/js/common-pages.js')}}"></script>
 <script src="{{asset('assets/js/login.js')}}"></script>
 </body>
-
+@toastr_js
+@toastr_render
 </html>

@@ -9,23 +9,16 @@
                 <div class="card">
                     <div class="card-header">
                         <h2>Create Product</h2>
-                        <span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>
-                        <div class="card-header-right"><i
-                                class="icofont icofont-spinner-alt-5"></i></div>
-
-                        <div class="card-header-right">
-                            <i class="icofont icofont-spinner-alt-5"></i>
-                        </div>
-
                     </div>
                     <div class="card-block">
-                        <h4 class="sub-title">Basic Inputs</h4>
+
                         <form method="post" action="{{route('product.store')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Input Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror">
+                                    <input type="text" name="name"
+                                           class="form-control @error('name') is-invalid @enderror">
                                     @error('name')
                                     <p class="text-danger">{{$message}}</p>
                                     @enderror
@@ -34,7 +27,8 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Input Price</label>
                                 <div class="col-sm-10">
-                                    <input type="number" name="price" class="form-control @error('price') is-invalid @enderror">
+                                    <input type="number" name="price"
+                                           class="form-control @error('price') is-invalid @enderror">
                                     @error('price')
                                     <p class="text-danger">{{$message}}</p>
                                     @enderror
@@ -45,9 +39,9 @@
                                 <div class="col-sm-10">
                                     <select name="brand" class="form-control">
                                         @forelse($brands as $brand)
-                                        <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                            <option value="{{$brand->id}}">{{$brand->name}}</option>
                                         @empty
-                                        <option>Brand</option>
+                                            <option>Brand</option>
                                         @endforelse
                                     </select>
                                 </div>
@@ -57,9 +51,9 @@
                                 <div class="col-sm-10">
                                     <select name="category" class="form-control">
                                         @forelse($categories as $category)
-                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                            <option value="{{$category->id}}">{{$category->name}}</option>
                                         @empty
-                                        <option>Category</option>
+                                            <option>Category</option>
                                         @endforelse
                                     </select>
                                 </div>
@@ -77,7 +71,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-success">Submit</button>
-                            <a href="{{route('product.list')}}" class="btn btn-success">Back</a>
+                            <a href="{{route('product.list')}}" class="btn btn-secondary">Back</a>
                         </form>
                     </div>
                 </div>

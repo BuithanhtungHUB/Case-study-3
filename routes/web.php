@@ -77,4 +77,7 @@ Route::prefix('shop')->group(function (){
     Route::get('/filterBrand/{id}',[ProductController::class,'filterBrand']);
     Route::get('/detail/{id}',[ProductController::class,'detailProduct'])->name('product.detail');
     Route::get('/filterPrice/{last}',[ProductController::class,'filterPrice']);
+    Route::get('/profile/{id}',[UserController::class,'profileUser'])->name('user.profile');
+    Route::post('/profile/{id}',[UserController::class,'editProfile'])->name('user.editProfile');
+
 });

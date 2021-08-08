@@ -72,7 +72,7 @@
             <div class="col-sm-12">
                 <!-- Authentication card start -->
                 <div class="signup-card card-block auth-body mr-auto ml-auto">
-                    <form action="{{route('users.store')}}" method="post" class="md-float-material">
+                    <form action="{{route('users.store')}}" method="post" class="md-float-material" enctype="multipart/form-data">
                         @csrf
                         <div class="auth-box">
                             <div class="row m-b-20">

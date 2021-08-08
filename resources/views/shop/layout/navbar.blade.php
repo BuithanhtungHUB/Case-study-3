@@ -11,13 +11,13 @@
                             <!-- start language -->
                             <div class="aa-language">
                                 <div class="dropdown">
-                                    <a class="btn dropdown-toggle" href="#" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                        <img src="img/flag/english.jpg" alt="english flag">ENGLISH
+                                    <a class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        <img src="https://kenh14cdn.com/thumb_w/620/2017/2-1503128133740.png" alt="english flag">ENGLISH
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <li><a href="#"><img src="img/flag/french.jpg" alt="">FRENCH</a></li>
-                                        <li><a href="#"><img src="img/flag/english.jpg" alt="">ENGLISH</a></li>
+                                        <li><a><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Flag_of_North_Vietnam_%281955%E2%80%931976%29.svg/230px-Flag_of_North_Vietnam_%281955%E2%80%931976%29.svg.png" alt="">VIETNAM</a></li>
+                                        <li><a><img src="https://kenh14cdn.com/thumb_w/620/2017/2-1503128133740.png" alt="">ENGLISH</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -39,21 +39,30 @@
                             <!-- / currency -->
                             <!-- start cellphone -->
                             <div class="cellphone hidden-xs">
-                                <p><span class="fa fa-phone"></span>00-62-658-658</p>
+                                <p><span class="fa fa-phone"></span>098-999-9999</p>
                             </div>
                             <!-- / cellphone -->
                         </div>
                         <!-- / header top left -->
                         <div class="aa-header-top-right">
                             <ul class="aa-head-top-nav-right">
-                                <li><a href="account.html">My Account</a></li>
                                 <li class="hidden-xs"><a href="wishlist.html">Wishlist</a></li>
-                                <li class="hidden-xs"><a href="cart.html">My Cart</a></li>
                                 <li class="hidden-xs"><a href="checkout.html">Checkout</a></li>
                                 @if(auth()->check())
-                                    <li><a href="{{route('admin.logout')}}">Logout</a></li>
+                                    <li class="aa-currency">
+                                        <div class="dropdown">
+                                            <a class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                {{auth()->user()->name}}<span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="{{route('user.profile',auth()->user()->id)}}"><i class="fas fa-user-circle">Profile</i></a></li>
+                                                <li><a href="{{route('admin.logout')}}"><i class="fas fa-sign-out-alt">Log out</i></a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+
                                 @else
-                                    <li><a href="{{route('admin.showFromlogin')}}">Login</a></li>
+                                    <li><a href="{{route('admin.showFromlogin')}}">login</a></li>
                                 @endif
 
                             </ul>

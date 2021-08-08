@@ -1,4 +1,5 @@
 @extends('shop.master')
+@section('title','Home')
 @section('content')
 <!-- Start slider -->
 <section id="aa-slider">
