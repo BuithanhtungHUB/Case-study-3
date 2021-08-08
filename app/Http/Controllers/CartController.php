@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class CartController extends Controller
 {
@@ -14,6 +15,7 @@ class CartController extends Controller
 
     public function index()
     {
+
         $products = Product::all();
         return view('shop.product.list', compact('products'));
     }

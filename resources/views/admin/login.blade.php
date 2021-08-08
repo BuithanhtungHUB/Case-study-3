@@ -3,13 +3,7 @@
 
 <head>
     <title>Log In</title>
-    <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <!-- Meta -->
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -17,6 +11,8 @@
     <meta name="keywords"
           content=" Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
     <meta name="author" content="CodedThemes">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <!-- Favicon icon -->
     <link rel="icon" href="{{asset('assets/images/favicon.ico')}}" type="image/x-icon">
     <!-- Google font-->
@@ -93,13 +89,21 @@
                             </div>
                             <hr/>
                             <div class="input-group">
-                                <input name="email" type="email" class="form-control" placeholder="Your Email Address">
+                                <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Your Email Address">
+                                @error('email') <p class="text-danger">{{$message}}</p> @enderror
                                 <span class="md-line"></span>
                             </div>
-                            <div class="input-group">
-                                <input name="password" type="password" class="form-control" placeholder="Password">
-                                <span class="md-line"></span>
+                            <div class="input-group" id="show_hide_password">
+                                <input name="password" class="form-control @error('password') is-invalid @enderror"
+                                       type="password" placeholder="Choose Password">
+                                <div class="input-group-addon">
+                                    <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                </div>
                             </div>
+                            @error('password') <p class="text-danger">{{$message}}</p> @enderror
+                            <span class="md-line"></span>
+                            {{--                                <input name="password" type="password" class="form-control" placeholder="Password">--}}
+                            {{--                                <span class="md-line"></span>--}}
                             <div class="row m-t-25 text-left">
                                 <div class="col-sm-7 col-xs-12">
                                     <div class="checkbox-fade fade-in-primary">
@@ -127,7 +131,7 @@
                             <div class="row m-t-30">
                                 <div class="col-md-12">
                                     <a href="{{route('users.create')}}"
-                                            class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">
+                                       class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">
                                         Create New Acount
                                     </a>
                                 </div>
@@ -145,51 +149,6 @@
     </div>
     <!-- end of container-fluid -->
 </section>
-<!-- Warning Section Starts -->
-<!-- Older IE warning message -->
-<!--[if lt IE 9]>
-<div class="ie-warning">
-    <h1>Warning!!</h1>
-    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers
-        to access this website.</p>
-    <div class="iew-container">
-        <ul class="iew-download">
-            <li>
-                <a href="http://www.google.com/chrome/">
-                    <img src="assets/images/browser/chrome.png" alt="Chrome">
-                    <div>Chrome</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.mozilla.org/en-US/firefox/new/">
-                    <img src="assets/images/browser/firefox.png" alt="Firefox">
-                    <div>Firefox</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://www.opera.com">
-                    <img src="assets/images/browser/opera.png" alt="Opera">
-                    <div>Opera</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.apple.com/safari/">
-                    <img src="assets/images/browser/safari.png" alt="Safari">
-                    <div>Safari</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                    <img src="assets/images/browser/ie.png" alt="">
-                    <div>IE (9 & above)</div>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <p>Sorry for the inconvenience!</p>
-</div>
-<![endif]-->
-<!-- Warning Section Ends -->
 <!-- Required Jquery -->
 <script type="text/javascript" src="{{asset('assets/js/jquery/jquery.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('assets/js/jquery-ui/jquery-ui.min.js')}}"></script>
@@ -201,6 +160,7 @@
 <script type="text/javascript" src="{{asset('assets/js/modernizr/modernizr.js')}}"></script>
 <script type="text/javascript" src="{{asset('assets/js/modernizr/css-scrollbars.js')}}"></script>
 <script type="text/javascript" src="{{asset('assets/js/common-pages.js')}}"></script>
+<script src="{{asset('assets/js/login.js')}}"></script>
 </body>
 
 </html>

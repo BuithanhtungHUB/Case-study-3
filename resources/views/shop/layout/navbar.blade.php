@@ -50,7 +50,10 @@
                                 <li class="hidden-xs"><a href="wishlist.html">Wishlist</a></li>
                                 <li class="hidden-xs"><a href="cart.html">My Cart</a></li>
                                 <li class="hidden-xs"><a href="checkout.html">Checkout</a></li>
-                                <li><a href="" data-toggle="modal" data-target="#login-modal">Login</a></li>
+                                <li><a href="{{route('admin.showFromlogin')}}">Login</a></li>
+                                <li><a href="{{route('admin.logout')}}">Logout</a></li>
+{{--                                <li><span>{{  auth()->user()->name }}</span></li>--}}
+
                             </ul>
                         </div>
                     </div>

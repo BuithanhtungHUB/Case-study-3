@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
@@ -18,11 +19,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//    return view('admin.users.update');
-//});
 
-
+Route::get('/',[CartController::class,'showHome'])->name('shop.home');
 Route::prefix('admin')->group(function (){
     Route::get('login', [LoginController::class, 'showFormLogin'])->name('admin.showFromlogin');
     Route::post('login', [LoginController::class, 'login'])->name('admin.login');
@@ -31,7 +29,8 @@ Route::prefix('admin')->group(function (){
 
     Route::middleware(['auth'])->group(function () {
         Route::prefix('users')->group(function () {
-            Route::get('/', [UserController::class, 'index'])->name('users.index');
+            Route::get('/', [UserController::class, 'showDashboard'])->name('admin.showDashboard');
+            Route::get('list', [UserController::class, 'index'])->name('users.index');
             Route::get('{id}/delete', [UserController::class, 'delete'])->name('users.delete');
             Route::get('update/{id}',[UserController::class, 'edit'])->name('users.edit');
             Route::post('update/{id}',[UserController::class, 'update'])->name('users.update');
@@ -65,7 +64,7 @@ Route::prefix('admin')->group(function (){
     });
 });
 Route::prefix('shop')->group(function (){
-    Route::get('/home',[CartController::class,'showHome'])->name('shop.home');
+
     Route::get('/list',[CartController::class,'index'])->name('shop.list');
     Route::get('/cart',[CartController::class,'cart'])->name('shop.cart');
     Route::get('/addToCart/{id}',[CartController::class,'addToCart'])->name('shop.addToCart');
