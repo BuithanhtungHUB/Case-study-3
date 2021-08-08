@@ -4,7 +4,6 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -20,13 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-<<<<<<< HEAD
-=======
 
-Route::get('/', function () {
-    return view('admin.dashboard');
-});
->>>>>>> 0748ec7346f19510ce220fef480193fa18650eea
 
 Route::get('/',[CartController::class,'showHome'])->name('shop.home');
 Route::prefix('admin')->group(function (){
