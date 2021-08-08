@@ -50,9 +50,11 @@
                                 <li class="hidden-xs"><a href="wishlist.html">Wishlist</a></li>
                                 <li class="hidden-xs"><a href="cart.html">My Cart</a></li>
                                 <li class="hidden-xs"><a href="checkout.html">Checkout</a></li>
-                                <li><a href="{{route('admin.showFromlogin')}}">Login</a></li>
-                                <li><a href="{{route('admin.logout')}}">Logout</a></li>
-{{--                                <li><span>{{  auth()->user()->name }}</span></li>--}}
+                                @if(auth()->check())
+                                    <li><a href="{{route('admin.logout')}}">Logout</a></li>
+                                @else
+                                    <li><a href="{{route('admin.showFromlogin')}}">Login</a></li>
+                                @endif
 
                             </ul>
                         </div>
