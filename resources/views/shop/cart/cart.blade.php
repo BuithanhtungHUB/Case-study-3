@@ -43,7 +43,7 @@
                                     @endforelse
                                     <tr>
                                         <td><b>Total Payment</b></td>
-                                        <td colspan="5" id="totalCart"><b>{{$totalCart}}&nbsp;$</b></td>
+                                        <td colspan="5" id="totalCart">{{$totalCart}}&nbsp;$</td>
                                     </tr>
                                     </tbody>
                                 </table>

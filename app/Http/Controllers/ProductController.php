@@ -52,10 +52,10 @@ class ProductController extends Controller
         return view('admin.products.update',compact('product','brands','categories'));
     }
 
-    public function update(Product $product,UpdateProductRequest $request,$id)
+    public function update(UpdateProductRequest $request,$id)
     {
+        $product = Product::findOrFail($id);
         if (!$request->hasFile('image')){
-            $product = Product::findOrFail($id);
             $path = $product->image;
         }else{
             $path = $request->file('image')->store('images','public');
@@ -95,9 +95,9 @@ class ProductController extends Controller
         $products = Product::where('category_id','LIKE','%'.$id.'%')->get();
         return response()->json($products);
     }
-    public function filterBrand($input)
+    public function filterBrand($id)
     {
-        $products = Product::where('brand_id','LIKE','%'.$input.'%')->get();
+        $products = Product::where('brand_id','LIKE','%'.$id.'%')->get();
         return response()->json($products);
     }
 
@@ -119,6 +119,12 @@ class ProductController extends Controller
     {
         $products = Product::all();
         return response()->json($products);
-//        return view('shop.product.list', compact('products','brands','categories'));
+    }
+
+    public function filterPrice($last)
+    {
+        $value = $last;
+        $products = Product::where([['price','>',0],['price','<=',$value]])->get();
+        return response()->json($products);
     }
 }

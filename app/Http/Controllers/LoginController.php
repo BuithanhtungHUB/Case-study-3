@@ -14,6 +14,12 @@ class LoginController extends Controller
         return view('admin.login');
     }
 
+    public function showDashboard()
+    {
+        return view('admin.dashboard');
+
+    }
+
     public function login(LoginRequest $request)
     {
 
@@ -30,7 +36,7 @@ class LoginController extends Controller
            if (!Gate::allows('loginAdmin')){
                return redirect()->route('shop.home');
            }
-           return redirect()->route('admin.showDashboard');
+           return redirect()->route('admin.dashboard');
 
        }else{
            session()->flash('login_error', 'Account not exits!');
