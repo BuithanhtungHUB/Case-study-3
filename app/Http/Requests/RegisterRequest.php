@@ -26,7 +26,8 @@ class RegisterRequest extends FormRequest
         return [
             'name' => 'required|unique:users,name',
             'email' => 'required|unique:users,email|email',
-            'password' => 'required|min:6'
+            'password' => 'required|min:6',
+            'password_confirm' => 'required|min:6|same:password'
         ];
     }
 
@@ -39,7 +40,10 @@ class RegisterRequest extends FormRequest
             'email.unique' => 'Email da ton tai',
             'email.email' => 'Email sai dinh dang',
             'password.required' => 'Password khong duoc de trong',
-            'password.min' => 'Password it nhat 6 ky tu'
+            'password.min' => 'Password it nhat 6 ky tu',
+            'password_confirm.required' => 'Password_confirm it nhat 6 ky tu',
+            'password_confirm.min' => 'Password_confirm it nhat 6 ky tu',
+            'password_confirm.same' => 'Mat khau xac nhan khong chinh xac'
         ];
     }
 }
