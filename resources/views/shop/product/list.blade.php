@@ -90,7 +90,7 @@
                         <!-- price range -->
                         <div class="aa-sidebar-price-range">
                             <div class="slidecontainer">
-                                <input type="range" min="1" max="100" value="100" class="slider filter-price" id="myRange">
+                                <input type="range" min="1" max="1000" value="1000" class="slider filter-price" id="myRange">
                                 <p>Price: <span>0 $</span>-><span id="demo"></span></p>
                             </div>
                         </div>

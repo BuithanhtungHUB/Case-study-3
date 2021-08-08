@@ -111,6 +111,7 @@ class UserController extends Controller
         $user->image = $path;
         $user->password = $pass;
         $user->save();
+        toastr()->success('Update thành công');
         return redirect()->route('user.profile',$user->id);
     }
 
