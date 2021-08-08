@@ -59,7 +59,7 @@
                                 <tr>
                                     <td scope="row">{{ $key+1 }}</td>
                                     <td>{{ $user->name }}</td>
-                                    <td><img src="{{asset('storage/'.$user->image)}}" alt=""></td>
+                                    <td><img src="{{asset('storage/'.$user->image)}}" style="width: 100px;height: 100px" alt=""></td>
                                     <td>{{ $user->email }}</td>
                                     <td>
                                         {{$user->role->name}}

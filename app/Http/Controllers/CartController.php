@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -20,12 +22,15 @@ class CartController extends Controller
     {
 
         $products = Product::all();
-        return view('shop.product.list', compact('products'));
+        $categories = Category::all();
+        $brands = Brand::all();
+        return view('shop.product.list', compact('products','brands','categories'));
     }
 
     public function cart()
     {
         $carts = session()->get('cart');
+//        session()->flush();
 
         if (empty($carts)){
             $carts = [];
@@ -58,6 +63,7 @@ class CartController extends Controller
         if (isset($carts[$id])) {
             $carts[$id]['quantity'] += 1;
             session()->put('cart', $carts);
+//            session()->flush();
         } else {
             $carts[$id] = [
                 'id' => $product->id,
@@ -76,8 +82,19 @@ class CartController extends Controller
     {
         $carts = session()->get('cart');
         unset($carts[$id]);
-
-        return $this->getTotalCart($carts);
+        session()->put('cart', $carts);
+        $totalCart = [];
+        foreach ($carts as $cart) {
+            $sum = $cart['price'] * $cart['quantity'];
+            array_push($totalCart, $sum);
+        }
+        $totalCart = array_sum($totalCart);
+        $data = [
+            'numbers' => count((array)session('cart')),
+            'totalCart' => $totalCart
+        ];
+        return response()->json($data);
+//        return $this->getTotalCart($carts);
     }
 
     public function quantity($id, Request $request)
@@ -98,12 +115,7 @@ class CartController extends Controller
         return response()->json($data);
     }
 
-
-    /**
-     * @param $carts
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getTotalCart($carts): \Illuminate\Http\JsonResponse
+    public function getTotalCart($carts)
     {
         session()->put('cart', $carts);
         $totalCart = [];

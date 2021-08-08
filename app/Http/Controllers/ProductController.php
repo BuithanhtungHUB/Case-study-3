@@ -52,10 +52,10 @@ class ProductController extends Controller
         return view('admin.products.update',compact('product','brands','categories'));
     }
 
-    public function update(Product $product,UpdateProductRequest $request,$id)
+    public function update(UpdateProductRequest $request,$id)
     {
+        $product = Product::findOrFail($id);
         if (!$request->hasFile('image')){
-            $product = Product::findOrFail($id);
             $path = $product->image;
         }else{
             $path = $request->file('image')->store('images','public');
@@ -79,10 +79,52 @@ class ProductController extends Controller
 
     }
 
-    public function search($value,Request $request)
+    public function search($input)
     {
-        $value = $request->value;
-        $products = Product::where('name','LIKE','%'.$value.'%')->get();
+        if (!empty($input)){
+            $value = $input;
+            $products = Product::where('name', 'LIKE', '%' . $value . '%')->get();
+        }else {
+            $products = Product::all();
+        }
+        return response()->json($products);
+    }
+
+    public function filterCategory($id)
+    {
+        $products = Product::where('category_id','LIKE','%'.$id.'%')->get();
+        return response()->json($products);
+    }
+    public function filterBrand($id)
+    {
+        $products = Product::where('brand_id','LIKE','%'.$id.'%')->get();
+        return response()->json($products);
+    }
+
+    public function detailProduct($id)
+    {
+        $product = Product::findOrFail($id);
+        $brand =$product->brand->name;
+        $category = $product->category->name;
+        $data = [
+            'product'=>$product,
+            'brand'=>$brand,
+            'category'=>$category
+
+        ];
+        return response()->json($data);
+    }
+
+    public function getList()
+    {
+        $products = Product::all();
+        return response()->json($products);
+    }
+
+    public function filterPrice($last)
+    {
+        $value = $last;
+        $products = Product::where([['price','>',0],['price','<=',$value]])->get();
         return response()->json($products);
     }
 }

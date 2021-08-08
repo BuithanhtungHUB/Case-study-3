@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[CartController::class,'showHome'])->name('shop.home');
 Route::prefix('admin')->group(function (){
     Route::get('login', [LoginController::class, 'showFormLogin'])->name('admin.showFromlogin');
+    Route::get('dashboard', [LoginController::class, 'showDashboard'])->name('admin.dashboard');
     Route::post('login', [LoginController::class, 'login'])->name('admin.login');
     Route::get('create', [UserController::class, 'create'])->name('users.create');
     Route::post('create', [UserController::class, 'store'])->name('users.store');
@@ -71,8 +72,9 @@ Route::prefix('shop')->group(function (){
     Route::get('/addToCart/{id}',[CartController::class,'addToCart'])->name('shop.addToCart');
     Route::get('/deleteCart/{id}',[CartController::class,'deleteCart'])->name('shop.deleteCart');
     Route::get('/quantity/{id}',[CartController::class,'quantity'])->name('shop.quantity');
-
-    Route::get('/update',[CartController::class,'update'])->name('shop.update');
     Route::get('/search/{value}',[ProductController::class,'search'])->name('shop.search');
-
+    Route::get('/filterCategory/{id}',[ProductController::class,'filterCategory']);
+    Route::get('/filterBrand/{id}',[ProductController::class,'filterBrand']);
+    Route::get('/detail/{id}',[ProductController::class,'detailProduct'])->name('product.detail');
+    Route::get('/filterPrice/{last}',[ProductController::class,'filterPrice']);
 });
