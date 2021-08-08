@@ -21,7 +21,7 @@ class CartController extends Controller
     public function index()
     {
 
-        $products = Product::all();
+        $products = Product::paginate(9);
         $categories = Category::all();
         $brands = Brand::all();
         return view('shop.product.list', compact('products','brands','categories'));

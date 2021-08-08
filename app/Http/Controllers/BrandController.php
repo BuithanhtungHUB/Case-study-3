@@ -11,7 +11,7 @@ class BrandController extends Controller
 {
     public function index()
     {
-        $brands = Brand::all();
+        $brands = Brand::orDerBy('updated_at','DESC')->paginate(5);
         return view('admin.brands.list',compact('brands'));
     }
 
@@ -25,6 +25,7 @@ class BrandController extends Controller
     {
         $brand->name = $request->name;
         $brand->save();
+        toastr()->success('Thêm mới thành công');
         return redirect()->route('brand.list');
     }
 
@@ -40,6 +41,7 @@ class BrandController extends Controller
         $brand = Brand::findOrFail($id);
         $brand->name = $request->name;
         $brand->save();
+        toastr()->success('Update mới thành công');
         return redirect()->route('brand.list');
     }
 
@@ -48,6 +50,7 @@ class BrandController extends Controller
         $brand = Brand::findOrFail($id);
         $brand->products()->delete();
         $brand->delete();
+        toastr()->success('Xóa thàng công');
         return redirect()->route('brand.list');
 
     }

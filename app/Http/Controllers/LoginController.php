@@ -36,10 +36,11 @@ class LoginController extends Controller
            if (!Gate::allows('loginAdmin')){
                return redirect()->route('shop.home');
            }
+           toastr()->success('Đăng nhập thành công');
            return redirect()->route('admin.dashboard');
 
        }else{
-           session()->flash('login_error', 'Account not exits!');
+           toastr()->error('Đăng nhập thất bại');
            return redirect()->route('admin.showFromlogin');
        }
     }

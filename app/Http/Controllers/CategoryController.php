@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::orDerBy('updated_at','DESC')->paginate(5);
         return view('admin.category.list',compact('categories'));
     }
 
@@ -25,6 +25,7 @@ class CategoryController extends Controller
     {
         $category->name = $request->name;
         $category->save();
+        toastr()->success('Thêm mới thành công');
         return redirect()->route('category.list');
     }
 
@@ -39,6 +40,7 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->name = $request->name;
         $category->save();
+        toastr()->success('Update thành công');
         return redirect()->route('category.list');
     }
 
@@ -47,6 +49,7 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->products()->delete();
         $category->delete();
+        toastr()->success('Xóa thành công');
         return redirect()->route('category.list');
 
     }

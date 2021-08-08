@@ -9,17 +9,8 @@
                 <div class="card">
                     <div class="card-header">
                         <h2>Create Category</h2>
-                        <span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>
-                        <div class="card-header-right"><i
-                                class="icofont icofont-spinner-alt-5"></i></div>
-
-                        <div class="card-header-right">
-                            <i class="icofont icofont-spinner-alt-5"></i>
-                        </div>
-
                     </div>
                     <div class="card-block">
-                        <h4 class="sub-title">Basic Inputs</h4>
                         <form method="post" action="{{route('category.store')}}">
                             @csrf
                             <div class="form-group row">
@@ -32,7 +23,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-success">Submit</button>
-                            <a href="{{route('category.list')}}" class="btn btn-success">Back</a>
+                            <a href="{{route('category.list')}}" class="btn btn-secondary">Back</a>
                         </form>
                     </div>
                 </div>

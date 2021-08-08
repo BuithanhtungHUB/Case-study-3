@@ -14,8 +14,8 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
-
+//        $products = Product::all()->sortByDesc('updated_at');
+        $products = Product::orDerBy('updated_at','DESC')->paginate(5);
         return view('admin.products.list',compact('products'));
     }
 
@@ -40,6 +40,7 @@ class ProductController extends Controller
         $product->brand_id = $request->brand;
         $product->description = $request->description;
         $product->save();
+        toastr()->success('Thêm mới thành công');
         return redirect()->route('product.list');
 
     }
@@ -67,6 +68,7 @@ class ProductController extends Controller
         $product->brand_id = $request->brand;
         $product->description = $request->description;
         $product->save();
+        toastr()->success('Update thành công');
         return redirect()->route('product.list');
 
     }
@@ -75,6 +77,7 @@ class ProductController extends Controller
     {
         $product =Product::findOrFail($id);
         $product->delete();
+        toastr()->success('Xóa thành công');
         return redirect()->route('product.list');
 
     }
