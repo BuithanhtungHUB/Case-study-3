@@ -28,8 +28,6 @@ class CartController extends Controller
     public function cart()
     {
         $carts = session()->get('cart');
-//        session()->flush();
-
         if (empty($carts)){
             $carts = [];
             session()->put('cart',$carts);
