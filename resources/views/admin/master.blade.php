@@ -268,6 +268,7 @@
 <script src="{{asset('assets/js/pcoded.min.js')}}"></script>
 <script src="{{asset('assets/js/demo-12.js')}}"></script>
 <script src="{{asset('assets/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
+<script src="{{asset('assets/js/login.js')}}"></script>
 <script>
     var $window = $(window);
     var nav = $('.fixed-button');
