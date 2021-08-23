@@ -45,6 +45,7 @@
                                     @endforelse
                                     </tbody>
                                 </table>
+                                {!! $payment->links() !!}
                             </div>
                         </div>
                     </div>

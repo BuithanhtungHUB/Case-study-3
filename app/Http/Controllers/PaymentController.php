@@ -52,7 +52,7 @@ class PaymentController extends Controller
 
     public function getList()
     {
-        $payment = Payment::all();
+        $payment = Payment::orDerBy('updated_at', 'DESC')->paginate(5);
         return view('shop.payment.payment-history',compact('payment'));
     }
 }
