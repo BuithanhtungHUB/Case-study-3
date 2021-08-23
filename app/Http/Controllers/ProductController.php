@@ -15,23 +15,23 @@ class ProductController extends Controller
     public function index()
     {
 //        $products = Product::all()->sortByDesc('updated_at');
-        $products = Product::orDerBy('updated_at','DESC')->paginate(5);
-        return view('admin.products.list',compact('products'));
+        $products = Product::orDerBy('updated_at', 'DESC')->paginate(5);
+        return view('admin.products.list', compact('products'));
     }
 
     public function create()
     {
         $brands = Brand::all();
         $categories = Category::all();
-        return view('admin.products.create',compact('brands','categories'));
+        return view('admin.products.create', compact('brands', 'categories'));
     }
 
-    public function store(Product $product,CreateProductRequest $request)
+    public function store(Product $product, CreateProductRequest $request)
     {
-        if (!$request->hasFile('image')){
-            $path ='images/r5z7GE2rr4jlGNVTCStsQj40BDBl7Ebx3qVgnzNL.jpg';
-        }else{
-            $path = $request->file('image')->store('images','public');
+        if (!$request->hasFile('image')) {
+            $path = 'images/r5z7GE2rr4jlGNVTCStsQj40BDBl7Ebx3qVgnzNL.jpg';
+        } else {
+            $path = $request->file('image')->store('images', 'public');
         }
         $product->name = $request->name;
         $product->image = $path;
@@ -50,16 +50,16 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $brands = Brand::all();
         $categories = Category::all();
-        return view('admin.products.update',compact('product','brands','categories'));
+        return view('admin.products.update', compact('product', 'brands', 'categories'));
     }
 
-    public function update(UpdateProductRequest $request,$id)
+    public function update(UpdateProductRequest $request, $id)
     {
         $product = Product::findOrFail($id);
-        if (!$request->hasFile('image')){
+        if (!$request->hasFile('image')) {
             $path = $product->image;
-        }else{
-            $path = $request->file('image')->store('images','public');
+        } else {
+            $path = $request->file('image')->store('images', 'public');
         }
         $product->image = $path;
         $product->name = $request->name;
@@ -75,7 +75,7 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
-        $product =Product::findOrFail($id);
+        $product = Product::findOrFail($id);
         $product->delete();
         toastr()->success('Xóa thành công');
         return redirect()->route('product.list');
@@ -84,10 +84,10 @@ class ProductController extends Controller
 
     public function search($input)
     {
-        if (!empty($input)){
+        if (!empty($input)) {
             $value = $input;
             $products = Product::where('name', 'LIKE', '%' . $value . '%')->get();
-        }else {
+        } else {
             $products = Product::all();
         }
         return response()->json($products);
@@ -95,25 +95,37 @@ class ProductController extends Controller
 
     public function filterCategory($id)
     {
-        $products = Product::where('category_id','LIKE','%'.$id.'%')->get();
+        $products = Product::where('category_id', 'LIKE', '%' . $id . '%')->get();
         return response()->json($products);
     }
+
     public function filterBrand($id)
     {
-        $products = Product::where('brand_id','LIKE','%'.$id.'%')->get();
+        $products = Product::where('brand_id', 'LIKE', '%' . $id . '%')->get();
         return response()->json($products);
     }
 
     public function detailProduct($id)
     {
         $product = Product::findOrFail($id);
-        $brand =$product->brand->name;
+        $brand = $product->brand->name;
         $category = $product->category->name;
+        $like = session()->get('like');
+        $userid = auth()->user()->id;
+        if (!isset($like[$id])) {
+            $like[$id] = [
+                'name' => $product->name,
+                'userid' => $userid,
+                'like' => 0
+            ];
+            session()->put('like', $like);
+        }
+            $like = $like[$id];
         $data = [
-            'product'=>$product,
-            'brand'=>$brand,
-            'category'=>$category
-
+            'product' => $product,
+            'brand' => $brand,
+            'category' => $category,
+            'like' => $like
         ];
         return response()->json($data);
     }
@@ -127,7 +139,27 @@ class ProductController extends Controller
     public function filterPrice($last)
     {
         $value = $last;
-        $products = Product::where([['price','>',0],['price','<=',$value]])->get();
+        $products = Product::where([['price', '>', 0], ['price', '<=', $value]])->get();
         return response()->json($products);
+    }
+
+    public function addLike($id)
+    {
+        $product = Product::findOrFail($id);
+        $userid = auth()->user()->id;
+        $like = session()->get('like');
+        if (!isset($like[$id])) {
+            $like[$id] = [
+                'name' => $product->name,
+                'userid' => $userid,
+                'like' => 1
+            ];
+
+        } else {
+            $like[$id]['like'] += 1;
+            session()->put('like', $like);
+        }
+        session()->put('like', $like);
+        return response()->json($like);
     }
 }

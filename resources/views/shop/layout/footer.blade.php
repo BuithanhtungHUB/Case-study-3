@@ -22,6 +22,9 @@
 <!-- Custom js -->
 <script src="{{asset('shop/js/shop.js')}}"></script>
 <script src="{{asset('shop/js/custom.js')}}"></script>
+<script>
+    $('#payment').modal('show')
+</script>
 
 
 

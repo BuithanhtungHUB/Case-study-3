@@ -37,9 +37,9 @@
                                     </figcaption>
                                 </figure>
                                 <div class="aa-product-hvr-content">
-                                    <a data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="far fa-heart"></span></a>
-                                    <a data-toggle="tooltip" data-placement="top" title="Compare"><span class="fas fa-exchange-alt"></span></a>
-                                    <a class="detailPro" detail="{{$product->id}}" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
+                                    <a class="likes" like="{{$product->id}}" data-toggle="tooltip" data-placement="top" title="like"><span class="fas fa-thumbs-up"></span></a>
+                                    <a data-toggle="tooltip" data-placement="top" title="Compare"><span class="far fa-heart"></span></a>
+                                    <a class="detailPro" detail="{{$product->id}}" data-toggle2="tooltip" data-placement="top" title="Detail" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
                                 </div>
                                 <!-- product badge -->
                                 <span class="aa-badge aa-sale" href="#">SALE!</span>

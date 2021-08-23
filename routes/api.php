@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,5 +20,5 @@ Route::middleware('auth:api')->get('/users', function (Request $request) {
     return $request->user();
 });
 Route::prefix('shop')->group(function (){
-    Route::get('/list',[\App\Http\Controllers\ProductController::class,'getList'])->name('shop.list');
+    Route::get('/list',[ProductController::class,'getList'])->name('shop.list');
 });

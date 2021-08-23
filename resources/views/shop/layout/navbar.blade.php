@@ -46,9 +46,9 @@
                         <!-- / header top left -->
                         <div class="aa-header-top-right">
                             <ul class="aa-head-top-nav-right">
-                                <li class="hidden-xs"><a href="wishlist.html">Wishlist</a></li>
-                                <li class="hidden-xs"><a href="checkout.html">Checkout</a></li>
+                                <li class="hidden-xs"><a href="">Wishlist</a></li>
                                 @if(auth()->check())
+                                    <li class="hidden-xs"><a href="{{route('payment.list')}}">Payment history</a></li>
                                     <li class="aa-currency">
                                         <div class="dropdown">
                                             <a class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

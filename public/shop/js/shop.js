@@ -1,9 +1,8 @@
 $(document).ready(function () {
     let origin = window.location.origin
     // $('.addToCart').click(function () {
-    $(document).on('click', '.addToCart' , function (){
+    $(document).on('click', '.addToCart', function () {
         let cartId = $(this).attr('cart')
-        console.log(cartId)
         $.ajax({
             url: origin + '/shop/addToCart/' + cartId,
             method: 'GET',
@@ -11,7 +10,7 @@ $(document).ready(function () {
             success: function (res) {
                 let counts = res.numbers
                 $('#count').html(counts)
-                $('#totalCart').html(res.totalCart+'&nbsp;$')
+                $('#totalCart').html(res.totalCart + '&nbsp;$')
                 toastr.success('Bạn đã thêm mới 1 sản phẩm vào gỏi hàng', {timeout: 900})
             },
             error: function () {
@@ -22,7 +21,7 @@ $(document).ready(function () {
 
     $('.remove').click(function () {
         // console.log(1)
-    // $(document).on('click', '.remove' , function (){
+        // $(document).on('click', '.remove' , function (){
         if (confirm('Bạn chắc chắn muốn xóa?')) {
             let cartId = $(this).attr('delete')
             removeCart(cartId)
@@ -32,9 +31,9 @@ $(document).ready(function () {
     $('.quantity').on('input', function () {
         let input = $(this).attr('input')
         let value = $('#' + input).val()
-        if (value <=0){
+        if (value <= 0) {
             removeCart(input)
-        }else {
+        } else {
             $.ajax({
                 url: origin + '/shop/quantity/' + input,
                 method: 'GET',
@@ -44,8 +43,8 @@ $(document).ready(function () {
                 },
                 success: function (res) {
                     let price = (res.carts.quantity * res.carts.price)
-                    $('#total-' + input).html(price+'&nbsp;$')
-                    $('#totalCart').html(res.totalCart+'&nbsp;$')
+                    $('#total-' + input).html(price + '&nbsp;$')
+                    $('#totalCart').html(res.totalCart + '&nbsp;$')
                 },
             });
         }
@@ -61,17 +60,17 @@ $(document).ready(function () {
                 $('#delete-' + ProductId).remove();
                 toastr.success('Bạn đã xóa thành công', {timeout: 900})
                 $('#count').html(counts)
-                $('#totalCart').html(res.totalCart+'&nbsp;$')
+                $('#totalCart').html(res.totalCart + '&nbsp;$')
             },
             error: function () {
-
                 toastr.error('that bai', {timeout: 900})
             }
         });
     }
-    $('#search-name').on('input',function (){
+
+    $('#search-name').on('input', function () {
         let input = $('#search-name').val()
-        if (input !='') {
+        if (input != '') {
             $.ajax({
                 url: origin + '/shop/search/' + input,
                 method: 'GET',
@@ -80,15 +79,10 @@ $(document).ready(function () {
                     value: input
                 },
                 success: function (res) {
-                    console.log(res)
                     display(res)
-                },
-                error: function (res) {
-                    console.log(res);
                 }
             });
-        }else {
-            // location.reload();
+        } else {
             $.ajax({
                 url: origin + '/api/shop/list/',
                 method: 'GET',
@@ -99,9 +93,10 @@ $(document).ready(function () {
             });
         }
     });
-    function display(arr){
+
+    function display(arr) {
         let data = ''
-        for (let i =0; i < arr.length; i ++ ){
+        for (let i = 0; i < arr.length; i++) {
             data += `
                         <ul class="aa-product-catg">
                             <!-- start single product item -->
@@ -115,8 +110,8 @@ $(document).ready(function () {
                                     </figcaption>
                                 </figure>
                                 <div class="aa-product-hvr-content">
-                                     <a data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="far fa-heart"></span></a>
-                                    <a data-toggle="tooltip" data-placement="top" title="Compare"><span class="fas fa-exchange-alt"></span></a>
+                                    <a class="likes" like="${arr[i].id}" data-toggle="tooltip" data-placement="top" title="like"><span class="fas fa-thumbs-up"></span></a>
+                                    <a data-toggle="tooltip" data-placement="top" title="Compare"><span class="far fa-heart"></span></a>
                                     <a class="detailPro" detail="${arr[i].id}" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
                                 </div>
                                 <!-- product badge -->
@@ -127,53 +122,58 @@ $(document).ready(function () {
         $('.search-product').html(data)
     }
 
-    $('.category-name').click(function (){
-    // $(document).on('click', '.category-name' , function (){
+    $('.category-name').click(function () {
+        // $(document).on('click', '.category-name' , function (){
         let categoryId = $(this).attr('cate')
         // console.log(categoryId)
         filterCategory(categoryId)
     });
-    function filterCategory(categoryId){
+
+    function filterCategory(categoryId) {
         $.ajax({
-            url:origin +'/shop/filterCategory/' + categoryId,
-            method:'GET',
-            type:'json',
-            success:function (res){
+            url: origin + '/shop/filterCategory/' + categoryId,
+            method: 'GET',
+            type: 'json',
+            success: function (res) {
                 console.log(res)
                 display(res)
             },
         })
     }
-    $('.brand-name').click(function (){
-    // $(document).on('click', '.brand-name' , function (){
+
+    $('.brand-name').click(function () {
+        // $(document).on('click', '.brand-name' , function (){
         let brandId = $(this).attr('brand')
         filterBrand(brandId)
     });
-    function filterBrand(brandId){
+
+    function filterBrand(brandId) {
         $.ajax({
-            url:origin +'/shop/filterBrand/' + brandId,
-            method:'GET',
-            type:'json',
-            success:function (res){
+            url: origin + '/shop/filterBrand/' + brandId,
+            method: 'GET',
+            type: 'json',
+            success: function (res) {
                 display(res)
             },
         })
     }
 
     // $('.detail-pro').click(function (){
-    $(document).on('click', '.detailPro' , function (){
+    $(document).on('click', '.detailPro', function () {
         let proId = $(this).attr('detail')
         $.ajax({
             url: origin + '/shop/detail/' + proId,
-            method:'GET',
-            type:'json',
-            success:function (res){
+            method: 'GET',
+            type: 'json',
+            success: function (res) {
                 // console.log(res)
                 display2(res)
             }
         })
     })
-    function display2(arr){
+
+    function display2(arr) {
+        console.log(arr)
         let data = `
                       <div class="col-md-6 col-sm-6 col-xs-12">
                                             <div class="aa-product-view-slider">
@@ -198,23 +198,38 @@ $(document).ready(function () {
                                                                 <p class="aa-product-avilability">Brand:&nbsp;<span>${arr.brand}</span></p>
                                                                 <p class="aa-product-avilability">Category:&nbsp;<span>${arr.category}</span></p>
                                                                 <p class="aa-product-avilability">Description:&nbsp;<span>${arr.product.description}</span></p>
+
+                                                                <p class="aa-product-avilability">like:&nbsp;<span>${arr.like.like}</span></p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>`
         $('.detail-content').html(data)
     }
-    $('.filter-price').on('input',function (){
+
+    $('.filter-price').on('input', function () {
         let price = $(this).val()
         $.ajax({
             url: origin + '/shop/filterPrice/' + price,
-            method:'GET',
-            type:'json',
-            data:{
-              value:price,
+            method: 'GET',
+            type: 'json',
+            data: {
+                value: price,
             },
-            success:function (res){
+            success: function (res) {
                 display(res)
+            }
+        })
+    });
+
+    $(document).on('click', '.likes', function () {
+        let proId = $(this).attr('like');
+        $.ajax({
+            url: origin + '/shop/productLike/' + proId,
+            method: 'GET',
+            type: 'json',
+            success: function (res) {
+                console.log(res)
             }
         })
     });
